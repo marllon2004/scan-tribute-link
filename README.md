@@ -1,73 +1,49 @@
-# Welcome to your Lovable project
+# 🧾 Scan Tribute Link
 
-## Project info
+**Leitor de tributos automatizado** — projeto desenvolvido como parte de um trabalho acadêmico.  
+O sistema permite **ler QR Codes ou códigos de barras de produtos** e exibir, em um **modal interativo**, as informações de tributos relacionadas ao item escaneado.
 
-**URL**: https://lovable.dev/projects/6f8c633d-35c9-478b-af7c-c8fde991872c
+---
 
-## How can I edit this code?
+## 🚀 Sobre o projeto
 
-There are several ways of editing your application.
+Este projeto foi **gerado inicialmente com auxílio da IA [Lovable.dev](https://lovable.dev/)**, como uma forma de **acelerar o desenvolvimento do front-end** e **explorar o uso de inteligência artificial em geração de código**.
 
-**Use Lovable**
+A interface foi criada utilizando:
+- ⚡ **Vite** (ambiente de build)
+- 🎨 **Tailwind CSS** (estilização)
+- 💻 **TypeScript** e **HTML/CSS**
+- 🧠 **IA Lovable.dev** para scaffolding inicial
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/6f8c633d-35c9-478b-af7c-c8fde991872c) and start prompting.
+O objetivo é desenvolver um **leitor simples de código de barras e QR Code**, que exibe dados de tributos do produto em uma interface moderna e intuitiva.
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 📚 Funcionalidades
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- 📷 Leitura de código de barras e QR Codes (via câmera ou leitor físico)
+- 🪟 Exibição de informações em modal
+- ⚙️ Front-end responsivo e rápido (Vite + Tailwind)
+- 🧱 Estrutura pronta para integração futura com banco de dados e backend
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## 🧩 Estrutura futura
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Em versões futuras, serão implementados:
+- 🗃️ Banco de dados para armazenamento das informações de tributos;
+- 🔙 Backend próprio (não gerado por IA);
+- 🔐 Autenticação e histórico de consultas.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🐳 Execução com Docker
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+Para rodar o projeto localmente via Docker:
 
-**Edit a file directly in GitHub**
+```bash
+# Subir o container
+docker compose up --build
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/6f8c633d-35c9-478b-af7c-c8fde991872c) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+# Acesse no navegador
+http://localhost:8080
