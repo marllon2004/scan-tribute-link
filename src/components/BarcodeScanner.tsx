@@ -35,24 +35,6 @@ const BarcodeScanner = () => {
   }
 };
 
-  // Simula busca de tributos no banco de dados
-  const fetchTributeData2 = (code: string): TributeData => {
-    const icms = Math.random() * 18 + 7; // 7-25%
-    const pis = Math.random() * 1.65 + 0.65; // 0.65-2.3%
-    const cofins = Math.random() * 7.6 + 3; // 3-10.6%
-    const ipi = Math.random() * 15; // 0-15%
-    
-    return {
-      codigo: code,
-      produto: `Produto ${code.substring(0, 8)}`,
-      icms: parseFloat(icms.toFixed(2)),
-      pis: parseFloat(pis.toFixed(2)),
-      cofins: parseFloat(cofins.toFixed(2)),
-      ipi: parseFloat(ipi.toFixed(2)),
-      total: parseFloat((icms + pis + cofins + ipi).toFixed(2)),
-    };
-  };
-
   // Mantém o foco no input escondido
   useEffect(() => {
     const handleClick = () => {
