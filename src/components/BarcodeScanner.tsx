@@ -4,12 +4,16 @@ import { Scan, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface TributeData {
-  codigo: string;
-  produto: string;
+  ean: string;
+  descricao: string;
+  ncm: string;
+  cest: string;
+  cfop_venda: string;
+  cst: string;
   icms: number;
-  pis: number;
-  cofins: number;
-  ipi: number;
+  icms_pdv: number;
+  red_bc_icms: number;
+  nat_rec_isenta: string;
   total: number;
 }
 
@@ -20,9 +24,19 @@ const BarcodeScanner = () => {
   const [isScanning, setIsScanning] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const fetchTributeData = async (code: string): Promise<TributeData | null> => {
+  try {
+    const res = await fetch(`http://localhost:3001/produto/${code}`);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
   // Simula busca de tributos no banco de dados
-  const fetchTributeData = (code: string): TributeData => {
-    // Simulação de dados - em produção, faria uma requisição ao backend
+  const fetchTributeData2 = (code: string): TributeData => {
     const icms = Math.random() * 18 + 7; // 7-25%
     const pis = Math.random() * 1.65 + 0.65; // 0.65-2.3%
     const cofins = Math.random() * 7.6 + 3; // 3-10.6%
@@ -60,7 +74,7 @@ const BarcodeScanner = () => {
   }, []);
 
   // Captura quando o scanner envia o código
-  const handleScannerInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleScannerInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const code = e.target.value.trim();
     if (!code) return;
 
@@ -68,7 +82,7 @@ const BarcodeScanner = () => {
     setIsScanning(false);
     
     // Simula busca no banco de dados
-    const data = fetchTributeData(code);
+    const data = await fetchTributeData(code);
     setTributeData(data);
     setShowModal(true);
 
@@ -173,12 +187,12 @@ const BarcodeScanner = () => {
             <div className="space-y-6 py-4">
               <div className="bg-muted rounded-lg p-4">
                 <p className="text-sm text-muted-foreground mb-1">Código de Barras</p>
-                <p className="font-mono font-semibold text-lg">{tributeData.codigo}</p>
+                <p className="font-mono font-semibold text-lg">{tributeData.ean}</p>
               </div>
 
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Produto</p>
-                <p className="font-semibold text-lg">{tributeData.produto}</p>
+                <p className="font-semibold text-lg">{tributeData.descricao}</p>
               </div>
 
               <div className="space-y-3">
@@ -186,23 +200,43 @@ const BarcodeScanner = () => {
                 
                 <div className="space-y-2">
                   <div className="flex justify-between items-center p-3 bg-muted rounded-lg">
-                    <span className="text-muted-foreground">ICMS</span>
+                    <span className="text-muted-foreground">NCM</span>
+                    <span className="font-semibold">{tributeData.ncm}</span>
+                  </div>
+                  
+                  <div className="flex justify-between items-center p-3 bg-muted rounded-lg">
+                    <span className="text-muted-foreground">CEST</span>
+                    <span className="font-semibold">{tributeData.cest}</span>
+                  </div>
+                  
+                  <div className="flex justify-between items-center p-3 bg-muted rounded-lg">
+                    <span className="text-muted-foreground">CFOP Venda</span>
+                    <span className="font-semibold">{tributeData.cfop_venda}</span>
+                  </div>
+                  
+                  <div className="flex justify-between items-center p-3 bg-muted rounded-lg">
+                    <span className="text-muted-foreground">CST</span>
+                    <span className="font-semibold">{tributeData.cst}</span>
+                  </div>
+
+                  <div className="flex justify-between items-center p-3 bg-muted rounded-lg">
+                    <span className="text-muted-foreground">% ICMS</span>
                     <span className="font-semibold">{tributeData.icms}%</span>
                   </div>
-                  
+
                   <div className="flex justify-between items-center p-3 bg-muted rounded-lg">
-                    <span className="text-muted-foreground">PIS</span>
-                    <span className="font-semibold">{tributeData.pis}%</span>
+                    <span className="text-muted-foreground">% ICMS PDV</span>
+                    <span className="font-semibold">{tributeData.icms_pdv}%</span>
                   </div>
-                  
+
                   <div className="flex justify-between items-center p-3 bg-muted rounded-lg">
-                    <span className="text-muted-foreground">COFINS</span>
-                    <span className="font-semibold">{tributeData.cofins}%</span>
+                    <span className="text-muted-foreground">% Red. BC ICMS</span>
+                    <span className="font-semibold">{tributeData.red_bc_icms}%</span>
                   </div>
-                  
+
                   <div className="flex justify-between items-center p-3 bg-muted rounded-lg">
-                    <span className="text-muted-foreground">IPI</span>
-                    <span className="font-semibold">{tributeData.ipi}%</span>
+                    <span className="text-muted-foreground">Nat. Rec. Isenta Pis/Cofins</span>
+                    <span className="font-semibold">{tributeData.nat_rec_isenta}</span>
                   </div>
                 </div>
 

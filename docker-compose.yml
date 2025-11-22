@@ -10,3 +10,27 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
     command: sh -c "npm install --silent && npm run dev -- --host 0.0.0.0"
+
+  db:
+    image: postgres:15
+    container_name: tributos-db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: tributos
+    ports:
+      - "5432:5432"
+    volumes:
+    - db-data:/var/lib/postgresql/data
+
+  api:
+    build: ./backend
+    container_name: tributos-api
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+
+volumes:
+  db-data:
