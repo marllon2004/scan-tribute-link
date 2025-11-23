@@ -12,6 +12,7 @@ O Scan Tribute Link foi inicialmente gerado com auxília da IA [Lovable.dev](htt
 - acelerar entregas
 - automatizar estruturas de código
 - explorar novos fluxos de desenvolvimento orientados por IA
+
 O projeto foi evoluído posteriormente de forma manual, refinando componentes, organizando o backend e conectando o sistema a um banco de dados real.
 
 ---
@@ -24,6 +25,7 @@ O projeto foi evoluído posteriormente de forma manual, refinando componentes, o
 - HTML/CSS
 - Lovable.dev - geração inicial da interface
 
+---
 
 # Objetivo principal
 
@@ -46,7 +48,7 @@ Criar um leito simples e eficiente de EAN/QR Code que exiba automaticamente os t
 1. Usuário escaneia um código de barras (EAN)
 2. O front-end envia requisição
 3. O backend consulta o PostgreSQL
-4. Caso o produtp exista: retorna todos os dados discais
+4. Caso o produto exista: retorna todos os dados fiscais
 5. O front-end exibe um modal com:
     - descrição
     - NCM
