@@ -99,10 +99,12 @@ const BarcodeScanner = () => {
       {/* Interface visual */}
       <div className="w-full max-w-2xl">
         <div className="text-center mb-8 animate-fade-in">
-          <h1 className="text-5xl font-bold mb-4 bg-clip-text text-transparent gradient-primary">
-            Scanner de Códigos
-          </h1>
-          <p className="text-muted-foreground text-lg">
+          <div className="gradient-primary h-32 flex items-center justify-center rounded-2xl">
+            <h1 className="text-5xl font-bold mb-4 bg-clip-text text-white">
+              Scanner de Códigos
+            </h1>
+          </div>
+          <p className="text-muted-foreground text-lg mt-5">
             Sistema de Leitura e Consulta de Tributos
           </p>
         </div>
