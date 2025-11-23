@@ -1,43 +1,76 @@
 # Scan Tribute Link
 
-**Leitor de tributos automatizado** — projeto desenvolvido como parte de um trabalho acadêmico para explorar a inovação, utilizando de IA.  
-O sistema permite **ler QR Codes ou códigos de barras de produtos** e exibir, em um **modal interativo**, as informações de tributos relacionadas ao item escaneado.
+Sistema automatizado de leitura e consulta tributária de produtos, desenvolvido como parte de um trabalho acadêmico de Gestão da Inovação utilizando Inteligência Artificial.
+O projeto permite ler códigos de barras (EAN) ou QR Codes e, imediatamente, exibir um modal interativo com todas as informações tributárias do produto, facilitando o cadastro fiscal, a conferência de dados e a tomada de decisões dentro de comércios e empresas.
 
 ---
 
 ## Sobre o projeto
 
-Este projeto foi **gerado inicialmente com auxílio da IA [Lovable.dev](https://lovable.dev/)**, como uma forma de **acelerar o desenvolvimento do front-end** e **explorar o uso de inteligência artificial em geração de código**.
-
-A interface foi criada utilizando:
-- **Vite** (ambiente de build)
-- **Tailwind CSS** (estilização)
-- **TypeScript** e **HTML/CSS**
-- **IA Lovable.dev** para scaffolding inicial
-
-O objetivo é desenvolver um **leitor simples de código de barras e QR Code**, que exibe dados de tributos do produto em uma interface moderna e intuitiva.
+O Scan Tribute Link foi inicialmente gerado com auxília da IA [Lovable.dev](https://lovable.dev/), como uma experimentação de ferramentas que utilizam IA para:
+- gerar scaffolding inicial do front-end
+- acelerar entregas
+- automatizar estruturas de código
+- explorar novos fluxos de desenvolvimento orientados por IA
+O projeto foi evoluído posteriormente de forma manual, refinando componentes, organizando o backend e conectando o sistema a um banco de dados real.
 
 ---
+
+# Tecnologias utilizadas
+
+- Vite - ambiente de build rápido
+- Tailwind CSS - estilização eficiente e responsiva
+- TypeScript
+- HTML/CSS
+- Lovable.dev - geração inicial da interface
+
+
+# Objetivo principal
+
+Criar um leito simples e eficiente de EAN/QR Code que exiba automaticamente os tributos e dados fiscais do produto, de forma visual, rápida e acessível.
 
 ## Funcionalidades
 
-- Leitura de código de barras e QR Codes (via câmera ou leitor físico)
-- Exibição de informações em modal
-- Front-end responsivo e rápido (Vite + Tailwind)
+- Leitura via câmera (webRTC)
+- Leitura via leitor físico de código de barras
+- Consulta automática das informações finais no banco
+- Exibição em modal moderno e intuitivo
+- Interface responsiva
+- Integração completa com API Node.js/Express
+- Banco PostgreSQL populado com planilha de produtos tributários
 
 ---
 
-## Banco de Dados
+## Fluxo de funcionamento
 
-O banco de dados é o PostgreSQL.
+1. Usuário escaneia um código de barras (EAN)
+2. O front-end envia requisição
+3. O backend consulta o PostgreSQL
+4. Caso o produtp exista: retorna todos os dados discais
+5. O front-end exibe um modal com:
+    - descrição
+    - NCM
+    - CEST
+    - CFOP
+    - CST
+    - ICMS
+    - ICMS PDV
 
-Conecte no PostgreSQL:
+Esses dados permitem:
+- cadastro fiscal correto
+- emissão de NF-e sem rejeições
+- redução de erros tributários
+- automação de processos contábeis
+
+## Banco de Dados (PostgreSQL)
+
+Conectar no container:
 
 ```
 docker exec -it tributos-db psql -U admin -d tributos
 ```
 
-Crie a tabela:
+Criação da tabela:
 
 ```
 CREATE TABLE produtos (
@@ -54,12 +87,14 @@ CREATE TABLE produtos (
 );
 ```
 
-Copie o arquivo CSV para dentro do container:
+Importação dos dados da planilha
+
+Copie o CSV para dentro do container:
 ```
 docker cp produtos.csv tributos-db:/produtos.csv
 ```
 
-Importe no PostgreSQL:
+Depois importe:
 ```
 docker exec -it tributos-db psql -U admin -d tributos -c "\COPY produtos FROM '/produtos.csv' CSV HEADER ENCODING 'UTF8';"
 ```
@@ -68,8 +103,15 @@ docker exec -it tributos-db psql -U admin -d tributos -c "\COPY produtos FROM '/
 Para rodar o projeto localmente via Docker:
 
 ```
-
 docker compose up --build
+```
 
-
+Front-end
+```
 http://localhost:8080
+```
+
+API
+```
+http://localhost:3001
+```
